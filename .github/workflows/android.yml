@@ -41,7 +41,7 @@ jobs:
             _(execution **${{ github.run_id }}** / attempt **${{ github.run_attempt }}**)_
           comment_tag: diff_comment
       - name: Local project dependency diff diagram for Gradle
-        uses: westonal/graph-diff@v0.1.1
+        uses: westonal/graph-diff@v0.1.2
         id: dependency-diff-generator
         with:
           project: Signal-Android
