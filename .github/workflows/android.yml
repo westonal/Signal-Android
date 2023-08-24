@@ -12,6 +12,7 @@ permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
+  build:
 
   diff-it:
     runs-on: ubuntu-latest
@@ -21,12 +22,18 @@ jobs:
 
     name: Gradle dependency diff diagram
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
           cache: gradle
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
       - name: Comment PR with execution number
         uses: thollander/actions-comment-pull-request@v2
         with:
@@ -34,8 +41,6 @@ jobs:
             Running a local gradle projects dependency diff of merge ${{ github.sha }}
             _(execution **${{ github.run_id }}** / attempt **${{ github.run_attempt }}**)_
           comment_tag: diff_comment
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Local project dependency diff diagram for Gradle
         uses: westonal/graph-diff@v0.1.1
         id: dependency-diff-generator
