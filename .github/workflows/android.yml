@@ -44,6 +44,7 @@ jobs:
         uses: westonal/graph-diff@v0.1.1
         id: dependency-diff-generator
         with:
+          project: Signal-Android
           configuration: playProdDebugRuntimeClasspath
       # Warning! There's no way I know of hosting the image on github, this example uses a free and open api but obviously THERE'S NO PRIVACY, consider setting up an S3 bucket or something
       - name: Upload the image to freeimage.host
